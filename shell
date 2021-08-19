@@ -1,0 +1,16 @@
+#!/usr/bin/env php
+<?php
+
+use App\Kernel;
+
+require 'vendor/autoload.php';
+require 'config/bootstrap.php';
+
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
+$kernel->boot();
+$container = $kernel->getContainer();
+$doctrine = $container->get('doctrine');
+$container->get('cache_clearer')->clear($kernel->getCacheDir());
+$sh = new \Psy\Shell();
+$sh->setScopeVariables(compact('kernel', 'container', 'doctrine'));
+$sh->run();

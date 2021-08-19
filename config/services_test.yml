@@ -1,0 +1,14 @@
+services:
+  App\Security\Encryption\EncryptionService:
+    arguments: ["%defuse_key%","@logger"]
+    public: true
+
+  app.user_repository:
+    class: Doctrine\ORM\EntityRepository
+    factory: ['@doctrine.orm.entity_manager', getRepository]
+    arguments:
+      - App\Entity\User
+    public: true
+
+  App\Api\ResponseFactory:
+    public: true

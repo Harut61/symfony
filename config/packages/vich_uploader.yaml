@@ -1,0 +1,11 @@
+vich_uploader:
+  db_driver: orm
+  mappings:
+    customer_images:
+      uri_prefix:         '%app.path.customer_images%'
+      upload_destination: '%kernel.root_dir%/../public%app.path.customer_images%'
+      namer: Vich\UploaderBundle\Naming\OrignameNamer
+    channel_partner_images:
+      uri_prefix:         '%app.path.channel_partner_images%'
+      upload_destination: '%kernel.root_dir%/../public%app.path.channel_partner_images%'
+      namer: Vich\UploaderBundle\Naming\OrignameNamer

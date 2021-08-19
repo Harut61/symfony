@@ -1,0 +1,9 @@
+app:
+    resource: "../../src/Controller/Web"
+    type:     annotation
+
+api:
+    resource: "../../src/Controller/Api"
+    type:     annotation
+    defaults:
+        _format: json

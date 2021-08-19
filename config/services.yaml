@@ -1,0 +1,102 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    app.path.customer_images: /uploads/customers/
+    app.path.channel_partner_images: /uploads/channel_partners/
+    locale: en
+    cache_type: file_system
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+    defuse_key: def000004d733de5dfd2bc5ba0bfd1e43b12047bf7b3516038798a95fd2c9bef8374df809573ebd32757f25230e048b6bc32858e14dd0705b0ec77b78b98231e20cb875c
+    api_base_url: https://www.my-business.com
+    # api_base_url: http://api-instance.mybusiness.demoweblink.com
+
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php,AppBundle}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+    App\EventListener\ApiExceptionSubscriber:
+        arguments: ['%kernel.debug%' , '@logger', '@App\Api\ResponseFactory']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    App\Api\ResponseFactory:
+
+    App\Pagination\PaginationFactory:
+        arguments: ["@router"]
+
+    App\EventListener\CorsListener:
+        tags:
+            - { name: kernel.event_subscriber }
+
+    App\Service\SerializerService:
+        arguments: ['@JMS\Serializer\SerializerInterface']
+
+    App\Service\PaginationService:
+
+    App\Service\ApiClient:
+        arguments: ['%api_base_url%']
+
+    App\Service\Configuration:
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@parameter_bag'
+
+
+    App\EventListener\ExceptionSubscriber:
+        arguments: ['%kernel.debug%' , '@logger']
+        tags:
+            - { name: kernel.event_subscriber }
+
+#    App\EventListener\DoctrineFiltersListener:
+#        arguments: ['@doctrine.orm.entity_manager']
+#        tags:
+#            - { name: kernel.event_listener, event: kernel.request}
+
+    app.user_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        arguments:
+            - App\Entity\User
+
+    App\Security\LoginFormAuthenticator:
+        arguments: ["@form.factory", "@app.user_repository","@router", "@security.password_encoder"]
+
+    App\Security\AdminLoginFormAuthenticator:
+        arguments: ["@form.factory", "@app.user_repository","@router", "@security.password_encoder"]
+
+    App\Doctrine\HashPasswordListener:
+        arguments: ["@security.password_encoder"]
+        tags:
+            - {name: doctrine.event_subscriber}
+
+    App\Security\Encryption\EncryptionService:
+        arguments: ["%defuse_key%","@logger"]
+
+    Sabre\Xml\Service:
+
+    App\Service\XmlService:
+        arguments: ['@Sabre\Xml\Service', '@doctrine.orm.entity_manager']
+
+    App\Command\ProcessXmlFeedsCommand:
+        arguments: ['@doctrine.orm.entity_manager', '@App\Service\XmlService']

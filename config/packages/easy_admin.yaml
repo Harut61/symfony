@@ -1,0 +1,101 @@
+easy_admin:
+  design:
+    menu:
+      - { entity: 'XmlFeed', icon: 'money' }
+      - { entity: 'XmlFeedImportRun', icon: 'address-book' }
+      - { entity: 'XmlFeedRecord' }
+      - { entity: 'XmlNode' }
+      - { entity: 'User', icon: 'user' }
+      - { entity: 'Configurations', icon: 'cog' }
+
+  edit:
+    actions: ['-delete']
+  list:
+    actions:
+      - { name: 'show', icon: 'search', label: false, title: 'Show' }
+      - 'search'
+      - { name: 'edit', icon: 'pencil', label: false, title: 'Edit' }
+      - { name: 'delete', icon: 'remove', label: false, title: 'Delete' }
+    max_results: 15
+    title: 'List of %%entity_label%%s'
+  site_name: 'Admin Panel'
+
+  entities:
+    XmlFeed:
+      class: App\Entity\XmlFeed
+      list:
+        filters: ['user']
+        fields:
+          - 'user'
+          - 'url'
+          - {property: 'statusText'}
+          - {property: 'lastRunStatusText'}
+          - 'feedRuns'
+      form:
+        fields:
+          - 'user'
+          - 'url'
+          - {property: 'status', type: 'App\Form\Type\FeedStatusType'}
+          - {property: 'lastRunStatus', type: 'App\Form\Type\FeedLastRunStatusType'}
+
+    XmlFeedImportRun:
+      class: App\Entity\XmlFeedImportRun
+      list:
+        filters:
+#          - {property: 'xmlFeed.user.email', mapped: false, type: 'entity'}
+    XmlFeedRecord:
+      class: App\Entity\XmlFeedRecord
+      list:
+        fields:
+          - {property: 'statusAsBool', label: 'Imported', type: 'boolean'}
+          - {property: 'statusMessage', label: 'Message'}
+          - {property: 'createdAt', label: 'Imported At'}
+          - {property: 'xmlFeed', label: 'Xml Feed'}
+    XmlNode:
+      class: App\Entity\XmlNode
+      list:
+        fields:
+          - 'name'
+          - 'apiFieldName'
+          - {property: 'dataTypeText', label: 'Data Type'}
+          - 'multiple'
+          - 'required'
+      form:
+        fields:
+          - 'name'
+          - 'apiFieldName'
+          - property: 'dataType'
+            label: 'Field Data Type?'
+            type: choice
+            type_options:
+              choices:
+                'String': '1'
+                'Numeric': '2'
+          - 'multiple'
+          - 'required'
+
+    User:
+      class: App\Entity\User
+      list:
+        fields: ['email', 'roles', 'feeds']
+      form:
+        form_options: { validation_groups: ['admin'] }
+        fields:
+          - 'email'
+          - { property: 'roles'}
+          - { property: 'plainPassword', type: 'text' }
+      show:
+        fields:
+          - 'email'
+          - {property: 'roles', type: 'array'}
+          - 'feeds'
+
+    Configurations:
+      class: App\Entity\Configuration
+      list:
+        fields: ['key', 'value', 'description', 'createdAt', 'updatedAt']
+      form:
+        fields:
+          - { property: 'key', type: 'text' }
+          - { property: 'value', type: 'text' }
+          - 'description'

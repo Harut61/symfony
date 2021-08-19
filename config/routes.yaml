@@ -1,0 +1,5 @@
+homepage:
+  schemes: [http, https]
+  path: /
+  controller: App\Controller\Web\MainController:homepageAction
+

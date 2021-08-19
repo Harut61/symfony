@@ -1,0 +1,114 @@
+﻿<?xml version="1.0"?>
+<businesses xmlns="https://www.my-business.com/businesses">
+    <business>
+        <title>Test Business</title>
+        <description>Lorem ipsum dolor sit amet</description>
+        <details>
+            <![CDATA[
+    Since this is a CDATA section
+    I can use all sorts of reserved characters
+    like >< " and &
+    or write things like
+    <foo></bar>
+    but my document is still well formed!
+]]>
+        </details>
+        <reference>SZ1029837</reference>
+        <country>United Kingdom</country>
+        <region>London</region>
+        <city>London</city>
+        <location_details>3329 East London</location_details>
+        <business_sectors>Retail|Fashion</business_sectors>
+        <currency>GBP</currency>
+        <turnover>100000</turnover>
+        <turnover_period>anually</turnover_period>
+        <net_profit>20000</net_profit>
+        <net_profit_period>anually</net_profit_period>
+        <asking_price>150000</asking_price>
+        <show_price_as>Asking Price</show_price_as>
+        <property_status>Freehold</property_status>
+        <business_type>Franchise|Mid Market</business_type>
+        <additional_info>Auction|Investment</additional_info>
+        <features>Accounts Available|Fully Fitted|Company For Sale</features>
+        <show_map>yes</show_map>
+        <show_video>no</show_video>
+        <video_link></video_link>
+        <seo_meta_title>Test Title</seo_meta_title>
+        <seo_meta_keywords>fashion,franchise,london</seo_meta_keywords>
+        <seo_meta_description>test description</seo_meta_description>
+    </business>
+    <business>
+        <title>Test Business</title>
+        <description>Lorem ipsum dolor sit amet</description>
+        <details>
+            <![CDATA[
+    Since this is a CDATA section
+    I can use all sorts of reserved characters
+    like >< " and &
+    or write things like
+    <foo></bar>
+    but my document is still well formed!
+]]>
+        </details>
+        <reference>SZ1029837</reference>
+        <country>United Kingdom</country>
+        <region>London</region>
+        <city>London</city>
+        <location_details>3329 East London</location_details>
+        <business_sectors>Retail|Fashion</business_sectors>
+        <currency>GBP</currency>
+        <turnover>100000</turnover>
+        <turnover_period>anually</turnover_period>
+        <net_profit>20000</net_profit>
+        <net_profit_period>anually</net_profit_period>
+        <asking_price>150000</asking_price>
+        <show_price_as>Asking Price</show_price_as>
+        <property_status>Freehold</property_status>
+        <business_type>Franchise|Mid Market</business_type>
+        <additional_info>Auction|Investment</additional_info>
+        <features>Accounts Available|Fully Fitted|Company For Sale</features>
+        <show_map>yes</show_map>
+        <show_video>no</show_video>
+        <video_link></video_link>
+        <seo_meta_title>Test Title</seo_meta_title>
+        <seo_meta_keywords>fashion,franchise,london</seo_meta_keywords>
+        <seo_meta_description>test description</seo_meta_description>
+    </business>
+    <business>
+        <title>Test Business</title>
+        <description>Lorem ipsum dolor sit amet</description>
+        <details>
+            <![CDATA[
+    Since this is a CDATA section
+    I can use all sorts of reserved characters
+    like >< " and &
+    or write things like
+    <foo></bar>
+    but my document is still well formed!
+]]>
+        </details>
+        <reference>SZ1029837</reference>
+        <country>United Kingdom</country>
+        <region>London</region>
+        <city>London</city>
+        <location_details>3329 East London</location_details>
+        <business_sectors>Retail|Fashion</business_sectors>
+        <currency>GBP</currency>
+        <turnover>100000</turnover>
+        <turnover_period>anually</turnover_period>
+        <net_profit>20000</net_profit>
+        <net_profit_period>anually</net_profit_period>
+        <asking_price>150000</asking_price>
+        <show_price_as>Asking Price</show_price_as>
+        <property_status>Freehold</property_status>
+        <business_type>Franchise|Mid Market</business_type>
+        <additional_info>Auction|Investment</additional_info>
+        <features>Accounts Available|Fully Fitted|Company For Sale</features>
+        <show_map>yes</show_map>
+        <show_video>no</show_video>
+        <video_link></video_link>
+        <seo_meta_title>Test Title</seo_meta_title>
+        <seo_meta_keywords>fashion,franchise,london</seo_meta_keywords>
+        <seo_meta_description>test description</seo_meta_description>
+    </business>
+</businesses>
